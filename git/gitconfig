@@ -1,0 +1,39 @@
+[include]
+    path = ~/.gitconfig_secret
+
+[alias]
+        aa = add --all
+	co = checkout
+	br = branch
+	ci = commit
+        cim = commit -m
+        cam = commit -am
+	ac = !git add -A && git commit -m
+	st = status
+	d = difftool
+
+        # Cleanup merged branches
+        bclean = "!f() { git branch --merged ${1-master} | grep -v " ${1-master}$" | xargs -r git branch -d; }; f"
+
+	# log
+        ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
+
+        # with dates relative
+        ld = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative
+
+        # with dates absolute
+	lda = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
+
+[push]
+	default = simple
+[core]
+	excludesfile = ~/.gitignore_global
+	pager = less -FXR
+[diff]
+	tool = meld
+[difftool]
+	prompt = false
+[difftool "meld"]
+        cmd = meld "$LOCAL" "$REMOTE"
+[merge]
+	tool = meld

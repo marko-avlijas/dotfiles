@@ -11,13 +11,13 @@ Tested on Ubuntu Ubuntu 20.04 LTS. Should work on Ubuntu-based distros like Linu
 
 First cd into dotfiles directory.
 
-    cp gitconfig_secret.example gitconfig_secret
+    cp git/gitconfig_secret.example git/gitconfig_secret
 
-Now open gitconfig_secret in your text editor and fill it with your git user name and email.
+Now open `git/gitconfig_secret` in your text editor and fill it with your git user name and email.
 
 To install everything: `./install/bootstrap.sh`
 
-Or pick and choose what to install by calling individual scripts.
+Or pick and choose what to install by calling individual scripts in `install` directory.
 
 
 ## What's inside?

@@ -10,5 +10,7 @@ sudo apt update
 
 source "$components_dir/install_git.sh"
 source "$components_dir/create_ssh_keys.sh"
+source "$components_dir/install_standard_cli_utils.sh"
+source "$components_dir/install_zsh.sh"
 
 success_msg "dotfiles installed"

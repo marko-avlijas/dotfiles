@@ -25,6 +25,9 @@ Or pick and choose what to install by calling individual scripts in `install` di
 * install & configure git
 * create github_rsa and bitbucket_rsa ssh keys (no passphrase)
 * install command line utilities (see list bellow)
+* install zshell & oh my zsh
+* setup 24-bit color in terminal (this works out of the box on ubuntu 20.04)
+* list remaining manual actions
 
 ## Command line utilities
 
@@ -41,15 +44,12 @@ https://github.com/sharkdp/bat/
 
 To do:
 
-* install zshell & omgzsh
 * compile vim from source
 * configure vim
-* setup 24-bit color in terminal (this works out of the box)
-* setup terminal themes
 * install & configure tmux
+* setup terminal themes
 * install other cli utils (rg, fd, bat)
 * install ruby using ruby-install and chruby
-* list remaining manual actions
 
 ## What's left to do
 

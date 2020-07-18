@@ -5,7 +5,7 @@
 
 info_msg "Installing git\n"
 
-sudo apt-get install -y git gitk
+sudo apt install -y git gitk
 
 if ! command_exists git; then
  fail_msg_and_exit "Install git"

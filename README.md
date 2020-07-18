@@ -24,6 +24,20 @@ Or pick and choose what to install by calling individual scripts in `install` di
 
 * install & configure git
 * create github_rsa and bitbucket_rsa ssh keys (no passphrase)
+* install command line utilities (see list bellow)
+
+## Command line utilities
+
+Standard ones: wget curl tree
+
+fd (faster find, respects .gitignore, written in rust)
+https://github.com/sharkdp/fd
+
+ripgrep (faster grep, respects .gitignore, written in rust)
+https://github.com/BurntSushi/ripgrep
+
+bat (cat with syntax highlighting, written in rust)
+https://github.com/sharkdp/bat/
 
 To do:
 
@@ -33,7 +47,7 @@ To do:
 * setup 24-bit color in terminal (this works out of the box)
 * setup terminal themes
 * install & configure tmux
-* install cli tools (rg, fd, bat, fzf, curl)
+* install other cli utils (rg, fd, bat)
 * install ruby using ruby-install and chruby
 * list remaining manual actions
 

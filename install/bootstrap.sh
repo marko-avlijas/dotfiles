@@ -6,7 +6,7 @@ source "$components_dir/common.sh"
 
 info_msg "Starting installation"
 
-# sudo apt-get update
+sudo apt update
 
 source "$components_dir/install_git.sh"
 source "$components_dir/create_ssh_keys.sh"

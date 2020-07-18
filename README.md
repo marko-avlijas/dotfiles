@@ -25,9 +25,21 @@ Or pick and choose what to install by calling individual scripts in `install` di
 * install & configure git
 * create github_rsa and bitbucket_rsa ssh keys (no passphrase)
 
+To do:
+
+* install zshell & omgzsh
+* compile vim from source
+* configure vim
+* setup 24-bit color in terminal (this works out of the box)
+* setup terminal themes
+* install & configure tmux
+* install cli tools (rg, fd, bat, fzf, curl)
+* install ruby using ruby-install and chruby
+* list remaining manual actions
+
 ## What's left to do
 
-These are things I didn't bother to automate and I need to do before I can start writing software.
+These are things I didn't bother to automate and I need to do manually before I can start writing software.
 
 * remap CAPS LOCK to CTRL
 * add generated ssh keys to github and bitbucket

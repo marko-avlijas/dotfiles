@@ -5,28 +5,31 @@
 # which is useful for debugging
 set -Euo pipefail
 
-DOTFILES_DIR="$(dirname "$(dirname "$(readlink -f "$BASH_SOURCE")")")"
-echo "DOTFILES_DIR = $DOTFILES_DIR"
+DOTFILES_DIR_ABS="$(dirname "$(dirname "$(dirname "$(readlink -f "$BASH_SOURCE")")")")"
+DOTFILES_DIR_REL_FROM_HOME=${DOTFILES_DIR_ABS#"$HOME/"}
+
+echo "DOTFILES_DIR_ABS = $DOTFILES_DIR_ABS"
+echo "DOTFILES_DIR_REL_FROM_HOME = $DOTFILES_DIR_REL_FROM_HOME"
 
 info_msg () {
-  printf "\n\r  [ \033[00;34m..\033[0m ] $1\n\n"
+  printf "\n\r  [ \033[00;34m..\033[0m ] $1\n"
 }
 
 success_msg () {
-  printf "\n\r\033[2K  [ \033[00;32mOK\033[0m ] $1\n\n"
+  printf "\n\r\033[2K  [ \033[00;32mOK\033[0m ] $1\n"
 }
 
 fail_msg () {
-  printf "\n\r\033[2K  [\033[0;31mFAIL\033[0m] $1\n\n" >&2
+  printf "\n\r\033[2K  [\033[0;31mFAIL\033[0m] $1\n" >&2
 }
 
 fail_msg_and_exit () {
-  fail_msg "$1"
+  fail_msg "$1\n"
   exit 1
 }
 
 # check to see if command is installed (and is in $PATH)
-is_installed()
+command_exists()
 {
   command -v "$1" >/dev/null 2>&1
 }

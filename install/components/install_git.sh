@@ -1,24 +1,25 @@
 #! /bin/bash
 
 # load common.sh if it isn't loaded
-[ -z "$DOTFILES_DIR" ] && source "$(dirname "$0")/common.sh"
+[ -z "$DOTFILES_DIR_ABS" ] && source "$(dirname "$0")/common.sh"
 
-info_msg "Installing git"
+info_msg "Installing git\n"
 
 sudo apt-get install -y git gitk
 
-if ! is_installed git; then
+if ! command_exists git; then
  fail_msg_and_exit "Install git"
 fi
 
 success_msg "Install git"
 
 # Create symbolic links to git dotfiles
-info_msg "Configuring git"
+info_msg "Configuring git\n"
 
+echo "Creating symlinks:"
 git_dotfiles=( "gitconfig" "gitignore_global" "gitconfig_secret" )
 for i in "${git_dotfiles[@]}"; do
-  ln -sfvr "$DOTFILES_DIR/git/$i" "$HOME/.$i"
+  ln -sfv "$DOTFILES_DIR_REL_FROM_HOME/config/git/$i" "$HOME/.$i"
 done
 
 # Verify git user.name and user.email are not empty

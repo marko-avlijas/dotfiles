@@ -1,14 +1,14 @@
 #! /bin/bash
 
-install_dir=$(dirname "$BASH_SOURCE")
+components_dir="$(dirname "$BASH_SOURCE")/components"
 
-source "$install_dir/common.sh"
+source "$components_dir/common.sh"
 
 info_msg "Starting installation"
 
 # sudo apt-get update
 
-source "$install_dir/install_git.sh"
-source "$install_dir/create_ssh_keys.sh"
+source "$components_dir/install_git.sh"
+source "$components_dir/create_ssh_keys.sh"
 
 success_msg "dotfiles installed"

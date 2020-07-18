@@ -5,12 +5,12 @@
 
 # Create ssh keys with empty passphrase for github and bitbucket
 
-info_msg "Creating github_rsa and bitbucket_rsa ssh keys"
+info_msg "Creating github_rsa and bitbucket_rsa ssh keys\n"
 
 my_git_user_email="$(git config user.email)"
 
 ssh-keygen -t rsa -b 4096 -C "$my_git_user_email" -N "" -f "$HOME/.ssh/github_rsa"
 ssh-keygen -t rsa -b 4096 -C "$my_git_user_email" -N "" -f "$HOME/.ssh/bitbucket_rsa"
 
-success_msg "github_rsa and bitbucket_rsa"
+success_msg "github_rsa and bitbucket_rsa\n"
 

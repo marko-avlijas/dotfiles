@@ -10,6 +10,7 @@ Tested on Ubuntu Ubuntu 20.04 LTS. Should work on Ubuntu-based distros like Linu
 **This will destroy your old configuration files!**
 
 First cd into dotfiles directory.
+Then:
 
     cp git/gitconfig_secret.example git/gitconfig_secret
 
@@ -19,6 +20,10 @@ To install everything: `./install/bootstrap.sh`
 
 Or pick and choose what to install by calling individual scripts in `install` directory.
 
+## Update [TODO]
+
+Some stuff is compiled from source or gotten from github release page. You can update those by using scripts in `update` directory.
+If you never update it will still be newer than Ubuntu packages.
 
 ## What's inside?
 
@@ -26,6 +31,7 @@ Or pick and choose what to install by calling individual scripts in `install` di
 * create github_rsa and bitbucket_rsa ssh keys (no passphrase)
 * install command line utilities (see list bellow)
 * install zshell & oh my zsh
+* compile neovim from source
 * setup 24-bit color in terminal (this works out of the box on ubuntu 20.04)
 * list remaining manual actions
 

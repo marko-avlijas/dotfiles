@@ -31,7 +31,7 @@ EOF
   fi
 }
 
-# install ruby & rails prerequisites
+# install ruby prerequisites
 info_msg "Installing ruby prerequisites\n"
 sudo apt install -y build-essential
 success_msg "Install ruby prerequisites"
@@ -60,7 +60,7 @@ else
 fi
 
 # install latest stable ruby version
-# ruby-install ruby
+ruby-install ruby
 
 # install chruby
 if chruby_installed; then

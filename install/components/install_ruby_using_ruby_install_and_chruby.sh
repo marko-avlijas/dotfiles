@@ -4,6 +4,8 @@
 [ -z "$DOTFILES_DIR_ABS" ] && source "$(dirname "$0")/common.sh"
 
 DOTFILES_SRC_DIR="$HOME/src"
+RUBIES_DIR="$HOME/.rubies"
+OLD_WORKING_DIRECTORY="$(pwd)"
 
 # returns true if chruby is installed
 chruby_installed() {
@@ -81,7 +83,25 @@ else
   success_msg "Install chruby"
 fi
 
+cd "$OLD_WORKING_DIRECTORY"
+
 # add chruby.sh and auto.sh to .zshrc
 # auto.sh automatically changes ruby version when you cd into directory with different .ruby-version file
 append_chruby_to_shell_rc_file "$HOME/.bashrc"
 append_chruby_to_shell_rc_file "$HOME/.zshrc"
+
+# create .ruby-version in $HOME
+installed_ruby=$(ls -1 "$RUBIES_DIR")
+echo $installed_ruby
+number_of_installed_rubies=$(echo "$installed_ruby" | wc -l)
+if [ -z $installed_ruby ]; then
+  fail_msg_and_exit "Expected to find 1 installed ruby in $RUBIES_DIR but found none. Can't create "$HOME/.ruby-version""
+elif (( number_of_installed_rubies != 1 )); then
+  fail_msg_and_exit "Expected to find 1 installed ruby in $RUBIES_DIR but found $number_of_installed_rubies.\n I don't know which one to set as default in "$HOME/.ruby-version""
+else
+  echo $installed_ruby > "$HOME/.ruby-version"
+  success_msg "Set $installed_ruby in "$HOME/.ruby-version""
+fi
+
+# reload shell to pickup chruby changes for next script (install_rails.sh)
+exec "$SHELL"

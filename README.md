@@ -35,6 +35,7 @@ If you never update it will still be newer than Ubuntu packages.
 * compile neovim from source
 * install & configure tmux
 * install ruby using ruby-install and chruby
+* install rails & dependecies
 * list remaining manual actions
 
 ## Command line utilities

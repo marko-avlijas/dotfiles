@@ -14,6 +14,7 @@ source "$components_dir/install_standard_cli_utils.sh"
 source "$components_dir/install_zsh.sh"
 source "$components_dir/install_oh_my_zsh.sh"
 source "$components_dir/compile_neovim.sh"
+source "$components_dir/install_tmux.sh"
 
 success_msg "dotfiles installed"
 source "$components_dir/list_remaining_manual_actions.sh"

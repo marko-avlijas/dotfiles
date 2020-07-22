@@ -1,6 +1,6 @@
 #! /bin/bash
 
-standard_cli_utils="wget curl tree"
+standard_cli_utils="wget curl tree xclip"
 
 # load common.sh if it isn't loaded
 [ -z "$DOTFILES_DIR_ABS" ] && source "$(dirname "$0")/common.sh"

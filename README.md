@@ -59,7 +59,8 @@ To do:
 
 ## What's left to do
 
-These are things I didn't bother to automate and I need to do manually before I can start writing software.
+These are things I couldn't automate and I need to do manually before I can start writing software.
 
 * remap CAPS LOCK to CTRL
 * add generated ssh keys to github and bitbucket
+* install tmux plugins (press prefix + I inside tmux)

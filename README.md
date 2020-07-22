@@ -27,12 +27,14 @@ If you never update it will still be newer than Ubuntu packages.
 
 ## What's inside?
 
+* setup 24-bit color in terminal (this works out of the box on ubuntu 20.04)
 * install & configure git
 * create github_rsa and bitbucket_rsa ssh keys (no passphrase)
 * install command line utilities (see list bellow)
 * install zshell & oh my zsh
 * compile neovim from source
-* setup 24-bit color in terminal (this works out of the box on ubuntu 20.04)
+* install & configure tmux
+* install ruby using ruby-install and chruby
 * list remaining manual actions
 
 ## Command line utilities
@@ -52,10 +54,9 @@ To do:
 
 * compile vim from source
 * configure vim
-* install & configure tmux
-* setup terminal themes
+* choose themes for vim and tmux (maybe https://github.com/rafi/awesome-vim-colorschemes)
+* setup terminal themes (maybe not necessary?)
 * install other cli utils (rg, fd, bat)
-* install ruby using ruby-install and chruby
 
 ## What's left to do
 

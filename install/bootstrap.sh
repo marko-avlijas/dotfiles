@@ -15,6 +15,7 @@ source "$components_dir/install_zsh.sh"
 source "$components_dir/install_oh_my_zsh.sh"
 source "$components_dir/compile_neovim.sh"
 source "$components_dir/install_tmux.sh"
+source "$components_dir/install_ruby_using_ruby_install_and_chruby.sh"
 
 success_msg "dotfiles installed"
 source "$components_dir/list_remaining_manual_actions.sh"

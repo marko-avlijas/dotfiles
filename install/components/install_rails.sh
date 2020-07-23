@@ -54,4 +54,4 @@ rails db:migrate
 rails test
 cd "$OLD_WORKING_DIRECTORY"
 
-info_msg "Please check everything is working by running:\ncd $LAB_DIR/$rails_test_app\nrails server"
+success_msg "Install rails"

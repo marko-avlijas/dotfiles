@@ -16,19 +16,16 @@ chruby_installed() {
 # only adds them if they do not already exist in the given file
 append_chruby_to_shell_rc_file() {
   shell_file=$1
-  CHRUBY_APPEND_CHRUBY_SH="source /usr/local/share/chruby/chruby.sh"
-  CHRUBY_APPEND_AUTO_SH="source /usr/local/share/chruby/auto.sh"
 
-  if grep "$CHRUBY_APPEND_CHRUBY_SH" $shell_file > /dev/null; then 
-    info_msg "chruby already added to $shell_file - skipping\n"
-  else
-    info_msg "Adding chruby to $shell_file\n"
-    cat >> $shell_file <<EOF
-$CHRUBY_APPEND_CHRUBY_SH
-$CHRUBY_APPEND_AUTO_SH
-EOF
-  success_msg "Added chruby to $shell_file"
-  fi
+  smart_append_to_file "$shell_file" "# Enable chruby"
+  smart_append_to_file "$shell_file" \
+	               "source /usr/local/share/chruby/chruby.sh"
+
+  smart_append_to_file "$shell_file" \
+	               "# Make chruby automatically change ruby version as you cd into project"
+  smart_append_to_file "$shell_file" \
+		       "source /usr/local/share/chruby/auto.sh"
+
 }
 
 # install ruby prerequisites

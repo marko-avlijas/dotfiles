@@ -39,11 +39,14 @@ success_msg "Install rails"
 rails_test_app="dotfiles_test_app"
 info_msg "Creating test app in $LAB_DIR/$rails_test_app\n"
 
-# [ -d "$LAB_DIR" ] || mkdir "$LAB_DIR"
-# cd "$LAB_DIR"
-# rails new "$rails_test_app"
-# cd "$rails_test_app"
-# bundle install
-# cd "$OLD_WORKING_DIRECTORY"
+mkdir -p "$LAB_DIR"
+cd "$LAB_DIR"
+rails new "$rails_test_app"
+cd "$rails_test_app"
+bundle install
+# rails g scaffold Post title body:text
+# rails db:migrate
+# rails test
+cd "$OLD_WORKING_DIRECTORY"
 
 info_msg "Please check everything is working by running:\ncd $LAB_DIR/$rails_test_app\nrails server"

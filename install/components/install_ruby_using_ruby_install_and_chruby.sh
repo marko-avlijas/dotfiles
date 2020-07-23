@@ -37,7 +37,7 @@ sudo apt install -y build-essential
 success_msg "Install ruby prerequisites"
 
 # create directory $DOTFILES_SRC_DIR if it doesn't exist and enter it
-[ -d "$DOTFILES_SRC_DIR" ] || mkdir "$DOTFILES_SRC_DIR"
+mkdir -p "$DOTFILES_SRC_DIR"
 cd "$DOTFILES_SRC_DIR"
 
 # install ruby-install

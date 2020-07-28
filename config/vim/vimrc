@@ -1,0 +1,20 @@
+
+" Truecolor (24-bit color) support
+set termguicolors
+
+" Settings
+" -------
+set expandtab     " change tabs to spaces
+" set tabs to 2 chars (ruby style)
+set shiftwidth=2
+set softtabstop=2
+
+set autoindent " Copy indent from current line when starting a new line
+syntax on " syntax highlight on
+set colorcolumn=80,120 " color columns at 80 and 120 characters width
+set hidden
+
+:set number
+
+" Save privilleged files with sudo
+command! W :execute ':silent w !sudo tee % > /dev/null' | :edit!

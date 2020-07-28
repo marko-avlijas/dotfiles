@@ -1,5 +1,6 @@
 #! /bin/bash
 
+DOTFILES_BOOTSTRAPPED="yes"
 components_dir="$(dirname "$BASH_SOURCE")/components"
 
 source "$components_dir/common.sh"

@@ -3,9 +3,7 @@
 # load common.sh if it isn't loaded
 [ -z "$DOTFILES_DIR_ABS" ] && source "$(dirname "$0")/common.sh"
 
-DOTFILES_SRC_DIR="$HOME/src"
 RUBIES_DIR="$HOME/.rubies"
-OLD_WORKING_DIRECTORY="$(pwd)"
 
 # returns true if chruby is installed
 chruby_installed() {
@@ -50,7 +48,7 @@ else
   sudo make install
 
   if ! command_exists ruby-install; then
-   fail_msg_and_exit "Installed ruby-install"
+   fail_msg_and_exit "Install ruby-install"
   fi
 
   success_msg "Install ruby-install\n"

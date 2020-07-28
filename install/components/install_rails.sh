@@ -4,7 +4,6 @@
 [ -z "$DOTFILES_DIR_ABS" ] && source "$(dirname "$0")/common.sh"
 
 LAB_DIR="$HOME/lab"
-OLD_WORKING_DIRECTORY="$(pwd)"
 
 # install rails prerequisites
 info_msg "Installing rails prerequisites: nodejs and dev packages for sql-lite and PostgreSQL\n"

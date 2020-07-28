@@ -7,9 +7,12 @@ set -Euo pipefail
 
 DOTFILES_DIR_ABS="$(dirname "$(dirname "$(dirname "$(readlink -f "$BASH_SOURCE")")")")"
 DOTFILES_DIR_REL_FROM_HOME=${DOTFILES_DIR_ABS#"$HOME/"}
+DOTFILES_SRC_DIR="$HOME/src" # directory for cloning git repos
+OLD_WORKING_DIRECTORY="$(pwd)"
 
 echo "DOTFILES_DIR_ABS = $DOTFILES_DIR_ABS"
 echo "DOTFILES_DIR_REL_FROM_HOME = $DOTFILES_DIR_REL_FROM_HOME"
+echo "DOTFILES_SRC_DIR = $DOTFILES_SRC_DIR"
 
 # check to see if command is installed (and is in $PATH)
 command_exists()

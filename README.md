@@ -16,9 +16,9 @@ Then:
 
 Now open `git/gitconfig_secret` in your text editor and fill it with your git user name and email.
 
-To install everything: `./install/bootstrap.sh`
+To install everything: `./script/install/bootstrap.sh`
 
-Or pick and choose what to install by calling individual scripts in `install` directory.
+Or pick and choose what to install by calling individual scripts in `script/install` directory.
 
 ## Update [TODO]
 

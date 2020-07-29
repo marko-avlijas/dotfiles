@@ -16,7 +16,10 @@ Then:
 
 Now open `git/gitconfig_secret` in your text editor and fill it with your git user name and email.
 
-To install everything: `./script/install/bootstrap.sh`
+Now install it in parts as laid out in `script/install`
+
+    ./script/install/1_install_git_and_tmux.sh
+
 
 Or pick and choose what to install by calling individual scripts in `script/install` directory.
 

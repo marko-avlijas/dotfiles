@@ -19,11 +19,11 @@ success_msg "Remove system vim"
 # return if vim is already installed
 if command_exists vim; then
   info_msg "Vim already installed - skipping"
-  if [ -v DOTFILES_BOOTSTRAPPED ]; then # is $DOTFILES_BOOTSTRAPPED defined?
-    # script has been called from install/bootstrap.sh
+
+  # return or exit depending whether called from other script
+  if [ -v CALLED_FROM_OTHER_SCRIPT ]; then # -v - is variable defined
     return 0 
   else
-    # script was called alone
     exit 0 
   fi
 fi

@@ -98,5 +98,4 @@ else
   success_msg "Set $installed_ruby in "$HOME/.ruby-version""
 fi
 
-# reload shell to pickup chruby changes for next script (install_rails.sh)
-exec "$SHELL"
+gem install tmuxinator

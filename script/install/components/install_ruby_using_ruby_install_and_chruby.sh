@@ -10,22 +10,6 @@ chruby_installed() {
   [ -f "/usr/local/share/chruby/chruby.sh" ] # does this file exist and is it a file
 }
 
-# appends 2 lines to shell file (.bashrc or .zshrc - $1 - first parametar)
-# only adds them if they do not already exist in the given file
-append_chruby_to_shell_rc_file() {
-  shell_file=$1
-
-  smart_append_to_file "$shell_file" "# Enable chruby"
-  smart_append_to_file "$shell_file" \
-	               "source /usr/local/share/chruby/chruby.sh"
-
-  smart_append_to_file "$shell_file" \
-	               "# Make chruby automatically change ruby version as you cd into project"
-  smart_append_to_file "$shell_file" \
-		       "source /usr/local/share/chruby/auto.sh"
-
-}
-
 # install ruby prerequisites
 info_msg "Installing ruby prerequisites\n"
 sudo apt install -y build-essential
@@ -79,11 +63,6 @@ else
 fi
 
 cd "$OLD_WORKING_DIRECTORY"
-
-# add chruby.sh and auto.sh to .zshrc
-# auto.sh automatically changes ruby version when you cd into directory with different .ruby-version file
-append_chruby_to_shell_rc_file "$HOME/.bashrc"
-append_chruby_to_shell_rc_file "$HOME/.zshrc"
 
 # create .ruby-version in $HOME
 installed_ruby=$(ls -1 "$RUBIES_DIR")

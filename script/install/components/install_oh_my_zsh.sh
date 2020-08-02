@@ -5,8 +5,10 @@
 
 if [ -d "$HOME/.oh-my-zsh" ]; then
   info_msg "oh my zsh already installed - skipping"
-  return 0
+  exit 0
 fi
+
+sudo apt install -y curl
 
 info_msg "Installing oh my zsh"
 

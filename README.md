@@ -19,7 +19,7 @@ Now open `git/gitconfig_secret` in your text editor and fill it with your git us
 Now install it in parts as laid out in `script/install`
 
     ./script/install/1_install_git_and_tmux.sh
-    ./script/install/2_before_zsh_and_zsh.sh
+    ./script/install/2_install_zsh_and_ruby_inside_tmux.sh
 
 Parts 2 and later are going to be done in tmux. It's best to open normal terminal window (not inside tmux) and maximize it.
 After every part check that everything was executed correctly.

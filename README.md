@@ -43,7 +43,7 @@ Everything with dependencies gets installed in part 4.
 First you are asked to enter sudo password. This is saved to a file in tmp dir and should be automatically deleted after tmuxinator is finished. This is to avoid entering sudo password in every tmux pane.
 
 You can see what's going to be installed in this step here:
-[script/install/3_parallel_install_1st_batch/.tmuxinator.yml](script/install/3_parallel_install_1st_batch/.tmuxinator.yml)
+[script/install/3_install_1st_batch/.tmuxinator.yml](script/install/3_install_1st_batch/.tmuxinator.yml)
 
 #### Part 4
 
@@ -71,11 +71,11 @@ Now install it in parts as laid out in `script/install`
 After every part check that everything was executed correctly.
 
 Pick and choose what to install by changing `.tmuxinator.yml` files in
-[3_parallel_install_1st_batch directory](script/install/3_parallel_install_1st_batch/.tmuxinator.yml) and
-[4_parallel_install_2nd_batch directory](script/install/4_parallel_install_2nd_batch/.tmuxinator.yml). Then run:
+[script/install/3_install_1st_batch/.tmuxinator.yml](script/install/3_install_1st_batch/.tmuxinator.yml) and
+[script/install/4_install_2nd_batch/.tmuxinator.yml](script/install/4_install_2nd_batch/.tmuxinator.yml). Then run:
 
-    ./script/install/3_parallel_install_1st_batch.zsh
-    ./script/install/4_parallel_install_2nd_batch.zsh
+    ./script/install/tmuxinator_install.sh 3_install_1st_batch
+    ./script/install/tmuxinator_install.sh 4_install_2nd_batch
 
 Individual install components are in [script/install/components](script/install/components)
 
@@ -114,8 +114,7 @@ To do:
 
 ## What's left to do
 
-These are things I couldn't automate and I need to do manually before I can start writing software.
+These are things I didn't bother to automate and I need to do manually before I can start writing software.
 
 * remap CAPS LOCK to CTRL
 * add generated ssh keys to github and bitbucket
-* install tmux plugins (press prefix + I inside tmux)

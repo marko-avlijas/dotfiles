@@ -8,7 +8,7 @@ tmux new-session -d -s "$TMUX_SESSION"
 
 tmux rename-window "Step 2" 
 
-tmux send-keys "$components_dir/create_ssh_keys.sh" Enter
+tmux send-keys "$components_dir/install_ruby_using_ruby_install_and_chruby.sh" Enter
 
 # create right pane
 tmux split-window -h

@@ -8,7 +8,7 @@
 
 info_msg "Installing zsh"
 
-sudo apt -y install zsh zsh-doc powerline fonts-powerline
+distro_package_manager_install zsh zsh-doc powerline fonts-powerline
 
 if ! command_exists zsh; then
  fail_msg_and_exit "Install zsh"

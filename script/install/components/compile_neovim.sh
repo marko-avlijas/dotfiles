@@ -19,7 +19,7 @@ fi
 info_msg "Installing nvim prerequisites"
 
 # install prerequisites
-sudo apt -y install ninja-build gettext libtool libtool-bin autoconf automake cmake g++ pkg-config unzip
+distro_package_manager_install ninja-build gettext libtool libtool-bin autoconf automake cmake g++ pkg-config unzip
 
 info_msg "Compiling neovim"
 

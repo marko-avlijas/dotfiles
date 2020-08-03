@@ -8,12 +8,12 @@
 
 # remove existing vim
 info_msg "Removing system vim"
-sudo apt remove -y vim \
-                   vim-runtime \
-                   gvim \
-                   vim-tiny \
-                   vim-common \
-                   vim-gui-common
+distro_package_manager_uninstall vim \
+                                 vim-runtime \
+                                 gvim \
+                                 vim-tiny \
+                                 vim-common \
+                                 vim-gui-common
 success_msg "Remove system vim"
 
 # return if vim is already installed

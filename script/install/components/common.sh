@@ -65,6 +65,19 @@ distro_package_manager_install() {
   sudo apt -y install "$@"
 }
 
+# Creates a lock file in $DOTFILES_TMP_DIR
+# 
+# Then calls sudo apt remove -y on Ubuntu
+# or sudo dnf remove -y on Fedora / Centos etc
+#
+# Then deletes the lock.
+#
+# If $DOTFILES_PASSWORD_FILE exists it's used as sudo password.
+# Else user is asked for password by sudo.
+distro_package_manager_uninstall() {
+  sudo apt -y remove "$@"
+}
+
 # output helpers
 info_msg () {
   printf "\n\r  [ \033[00;34m..\033[0m ] $1\n"

@@ -71,11 +71,13 @@ Now install it in parts as laid out in `script/install`
 After every part check that everything was executed correctly.
 
 Pick and choose what to install by changing `.tmuxinator.yml` files in
-`3_parallel_install_1st_batch` and `4_parallel_install_2nd_batch` directories.
+[3_parallel_install_1st_batch directory](script/install/3_parallel_install_1st_batch/.tmuxinator.yml) and
+[4_parallel_install_2nd_batch directory](script/install/4_parallel_install_2nd_batch/.tmuxinator.yml). Then run:
 
     ./script/install/3_parallel_install_1st_batch.zsh
     ./script/install/4_parallel_install_2nd_batch.zsh
 
+Individual install components are in [script/install/components](script/install/components)
 
 ## Update [TODO]
 
@@ -84,20 +86,15 @@ If you never update it will still be newer than Ubuntu packages.
 
 ## What's inside?
 
-* setup 24-bit color in terminal (this works out of the box on ubuntu 20.04)
-* install & configure git
-* create github_rsa and bitbucket_rsa ssh keys (no passphrase)
-* install command line utilities (see list bellow)
-* install zshell & oh my zsh
-* compile neovim from source
-* install & configure tmux
-* install ruby using ruby-install and chruby
-* install rails & dependecies
-* list remaining manual actions
+Please checkout these directories:
 
-## Command line utilities
+* [config](config)
+* [install/script/components](install/script/components)
 
-Standard ones: wget curl tree
+I use neovim & vim as editor, tmux and zsh and have some git aliases.
+I am a rails developer so I have to install ruby, node, yarn, postgresql, sqlite and rails.
+
+Maybe somewhat exotic stuff are:
 
 fd (faster find, respects .gitignore, written in rust)
 https://github.com/sharkdp/fd
@@ -110,11 +107,10 @@ https://github.com/sharkdp/bat/
 
 To do:
 
-* compile vim from source
-* configure vim
 * choose themes for vim and tmux (maybe https://github.com/rafi/awesome-vim-colorschemes)
 * setup terminal themes (maybe not necessary?)
 * install other cli utils (rg, fd, bat)
+* install postgresql
 
 ## What's left to do
 

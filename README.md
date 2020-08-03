@@ -48,7 +48,9 @@ You can see what's going to be installed in this step here:
 #### Part 4
 
 Everything that depends on something from step 3 can be installed now.
-For example I am installing rails in this step because it depends on node and yarn and databases which are installed in step 3.
+
+You can see what's going to be installed in this step here:
+[script/install/4_install_2nd_batch/.tmuxinator.yml](script/install/4_install_2nd_batch/.tmuxinator.yml)
 
 
 ## How to install
@@ -78,6 +80,7 @@ Pick and choose what to install by changing `.tmuxinator.yml` files in
     ./script/install/tmuxinator_install.sh 4_install_2nd_batch
 
 Individual install components are in [script/install/components](script/install/components)
+and can be run independently if you wish so.
 
 ## Update [TODO]
 

@@ -12,7 +12,7 @@ chruby_installed() {
 
 # install ruby prerequisites
 info_msg "Installing ruby prerequisites\n"
-sudo apt install -y build-essential
+distro_package_manager_install build-essential
 success_msg "Install ruby prerequisites"
 
 # create directory $DOTFILES_SRC_DIR if it doesn't exist and enter it

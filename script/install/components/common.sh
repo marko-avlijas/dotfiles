@@ -52,6 +52,20 @@ smart_append_to_file() {
   return 0
 }
 
+# Creates a lock file in $DOTFILES_TMP_DIR
+# 
+# Then calls sudo apt install -y on Ubuntu
+# or sudo dnf install -y on Fedora / Centos etc
+#
+# Then deletes the lock.
+#
+# If $DOTFILES_PASSWORD_FILE exists it's used as sudo password.
+# Else user is asked for password by sudo.
+distro_package_manager_install() {
+  sudo apt -y install "$@"
+}
+
+# output helpers
 info_msg () {
   printf "\n\r  [ \033[00;34m..\033[0m ] $1\n"
 }

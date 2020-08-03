@@ -7,6 +7,6 @@ LAB_DIR="$HOME/lab"
 
 info_msg "Installing node"
 
-sudo apt install -y nodejs
+distro_package_manager_install nodejs
 
 success_msg "Install node"

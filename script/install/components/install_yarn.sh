@@ -10,8 +10,8 @@ info_msg "Installing yarn"
 
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-sudo apt remove -y cmdtest
+sudo apt remove -y cmdtest # can cause problems on some ubuntu versions
 sudo apt update
-sudo apt install -y yarn
+distro_package_manager_install yarn
 
 success_msg "Install yarn"

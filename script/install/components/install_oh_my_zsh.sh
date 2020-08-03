@@ -8,7 +8,7 @@ if [ -d "$HOME/.oh-my-zsh" ]; then
   exit 0
 fi
 
-sudo apt install -y curl
+distro_package_manager_install curl
 
 info_msg "Installing oh my zsh"
 

@@ -7,7 +7,7 @@
 
 info_msg "Installing tmux\n"
 
-sudo apt install -y tmux
+distro_package_manager_install tmux
 
 if ! command_exists tmux; then
  fail_msg_and_exit "Install tmux"

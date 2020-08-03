@@ -31,14 +31,14 @@ fi
 # install prerequisites
 # seems there are no prerequisites for Ubuntu 20.04?
 # info_msg "Installing vim prerequisites\n"
-# sudo apt install -y libncurses5-dev \
-                    # libatk1.0-dev \
-                    # libbonoboui2-dev \
-                    # libcairo2-dev \
-                    # libx11-dev \
-                    # libxpm-dev \
-                    # libxt-dev \
-                    # python-dev
+# distro_package_manager_install libncurses5-dev \
+                               # libatk1.0-dev \
+                               # libbonoboui2-dev \
+                               # libcairo2-dev \
+                               # libx11-dev \
+                               # libxpm-dev \
+                               # libxt-dev \
+                               # python-dev
 # success_msg "Install vim prerequisites"
 
 # create directory $DOTFILES_SRC_DIR if it doesn't exist and enter it

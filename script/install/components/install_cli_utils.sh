@@ -7,11 +7,11 @@ standard_cli_utils="wget curl tree xclip htop fd-find ripgrep"
 
 info_msg "Installing standard cli utilities:\n$standard_cli_utils"
 
-sudo apt -y install $standard_cli_utils
+distro_package_manager_install $standard_cli_utils
 
 # for ubuntu only because it installs packages with weird names
 fdfind_path="$(which fdfind)"
-if [ -z fdfind_path ]; then
+if [ -z $fdfind_path ]; then
   sudo ln -sv "fd" "$fdfind_path"
 else
   fail_msg_and_exit "fdfind installation failed"

@@ -6,5 +6,5 @@
 LAB_DIR="$HOME/lab"
 
 info_msg "Installing postgresql and sqlite3"
-sudo apt install -y sqlite3 libsqlite3-dev postgresql libpq-dev postgresql-doc
+distro_package_manager_install sqlite3 libsqlite3-dev postgresql libpq-dev postgresql-doc
 success_msg "Install postgresql and sqlite3"

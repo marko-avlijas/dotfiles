@@ -17,7 +17,8 @@ info_msg "Installing pgadmin4"
 curl https://www.pgadmin.org/static/packages_pgadmin_org.pub | sudo apt-key add
 
 # Create the repository configuration file:
-sudo sh -c 'echo "deb https://ftp.postgresql.org/pub/pgadmin/pgadmin4/apt/$(lsb_release -cs) pgadmin4 main" > /etc/apt/sources.list.d/pgadmin4.list && apt update'
+sudo sh -c 'echo "deb https://ftp.postgresql.org/pub/pgadmin/pgadmin4/apt/$(lsb_release -cs) pgadmin4 main" > /etc/apt/sources.list.d/pgadmin4.list'
+distro_package_manager_update
 
 #
 # Install pgAdmin

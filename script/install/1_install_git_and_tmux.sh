@@ -6,7 +6,7 @@ source "$components_dir/common.sh"
 
 info_msg "Starting installation"
 
-sudo apt update
+distro_package_manager_update
 
 source "$components_dir/install_git.sh"
 source "$components_dir/install_tmux.sh"

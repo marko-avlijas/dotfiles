@@ -51,18 +51,14 @@ windows:
         - "<%= @settings['components_dir'] %>/compile_full_vim.sh"
         - "<%= @settings['components_dir'] %>/configure_vim_and_neovim.sh"
   - dev:
-      layout: even-horizontal
+      layout: tiles
       panes:
-        - "<%= @settings['components_dir'] %>/install_postgresql_and_sqlite.sh"
-        - "<%= @settings['components_dir'] %>/install_rails.sh"
+        - "<%= @settings['components_dir'] %>/install_databases.sh"
+        - "<%= @settings['components_dir'] %>/install_node.sh"
+        - "<%= @settings['components_dir'] %>/install_yarn.sh"
   - cli:
       layout: even-horizontal
       panes:
-        - "<%= @settings['components_dir'] %>/install_standard_cli_utils.sh"
-        - echo ""
-  - cli:
-      layout: even-horizontal
-      panes:
-        - "<%= @settings['components_dir'] %>/list_remaining_manual_actions.sh"
-        - echo ""
+        - "<%= @settings['components_dir'] %>/install_cli_utils.sh"
+        - "<%= @settings['components_dir'] %>/create_ssh_keys.sh"
 

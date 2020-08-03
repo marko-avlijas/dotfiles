@@ -5,22 +5,6 @@
 
 LAB_DIR="$HOME/lab"
 
-# install rails prerequisites
-info_msg "Installing rails prerequisites: nodejs and dev packages for sql-lite and PostgreSQL\n"
-sudo apt install -y nodejs libsqlite3-dev libpq-dev
-success_msg "Install rails prerequisites: nodejs and dev packages for sql-lite and PostgreSQL\n"
-
-# https://classic.yarnpkg.com/en/docs/install/#debian-stable
-info_msg "Installing rails prerequisites: yarn"
-
-curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
-echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-sudo apt remove -y cmdtest
-sudo apt update
-sudo apt install -y yarn
-
-success_msg "Installing rails prerequisites: yarn"
-
 # install rails
 info_msg "Installing rails\n"
 

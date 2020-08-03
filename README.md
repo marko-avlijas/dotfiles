@@ -40,7 +40,7 @@ It only installs:
 Here is where mass parallel installation starts. Everything that has no dependencies (expect what's installed in steps 1 and 2) is installed now.
 Everything with dependencies gets installed in part 4.
 
-First you are asked to enter sudo password. This is saved to a file in tmp dir and should be deleted after tmuxinator is finished. This is to avoid entering sudo password in every tmux pane.
+First you are asked to enter sudo password. This is saved to a file in tmp dir and should be automatically deleted after tmuxinator is finished. This is to avoid entering sudo password in every tmux pane.
 
 You can see what's going to be installed in this step here:
 [script/install/3_parallel_install_1st_batch/.tmuxinator.yml](script/install/3_parallel_install_1st_batch/.tmuxinator.yml)

@@ -1,18 +1,30 @@
 #! /bin/bash
 
 # https://vaneyckt.io/posts/safer_bash_scripts_with_set_euxo_pipefail/
+set -Euo pipefail
+
 # -x option causes bash to print each command before executing it
 # which is useful for debugging
-set -Euo pipefail
+# you can set it anywhere in file like this
+# set -x
 
 DOTFILES_DIR_ABS="$(dirname "$(dirname "$(dirname "$(dirname "$(readlink -f "$BASH_SOURCE")")")")")"
 DOTFILES_DIR_REL_FROM_HOME="${DOTFILES_DIR_ABS#"$HOME/"}"
 DOTFILES_SRC_DIR="$HOME/src" # directory for cloning git repos
 
-DOTFILES_INSTALL_DIR="${DOTFILES_DIR_ABS}/script/install"
-DOTFILES_INSTALL_COMPONENTS_DIR="${DOTFILES_INSTALL_DIR}/components"
-DOTFILES_TMP_DIR="${DOTFILES_DIR_ABS}/tmp"
+DOTFILES_INSTALL_DIR="$DOTFILES_DIR_ABS/script/install"
+DOTFILES_INSTALL_COMPONENTS_DIR="$DOTFILES_INSTALL_DIR/components"
+
+DOTFILES_TMP_DIR="$DOTFILES_DIR_ABS/tmp"
 DOTFILES_PASSWORD_FILE="$DOTFILES_TMP_DIR/pass"
+DOTFILES_PACKAGE_MANAGER_LOCK_DIR="$DOTFILES_TMP_DIR/lock"
+DOTFILES_PACKAGE_MANAGER_LOCK_INFO_FILE="$DOTFILES_PACKAGE_MANAGER_LOCK_DIR/info"
+
+# how many times to try to create the lock
+DOTFILES_PACKAGE_MANAGER_LOCK_TRIES=300
+# how long to sleep in seconds after I can't create a lock
+DOTFILES_PACKAGE_MANAGER_LOCK_SLEEP_BETWEEN_TRIES=1
+
 OLD_WORKING_DIRECTORY="$(pwd)"
 
 echo "DOTFILES_DIR_ABS = $DOTFILES_DIR_ABS"
@@ -52,47 +64,114 @@ smart_append_to_file() {
   return 0
 }
 
-# Creates a lock file in $DOTFILES_TMP_DIR
+# if $DOTFILES_PASSWORD_FILE exists it feeds it to sudo
+# using sudo's --stdin option.
+# Otherwise it just performs sudo with given arguments
+# and user has to type the sudo password.
+feed_password_into_sudo() {
+  # "$@" means expand all parameters just like they were sent
+  if [ -f $DOTFILES_PASSWORD_FILE ]; then
+    cat "$DOTFILES_PASSWORD_FILE" | sudo --stdin "$@"
+  else
+    sudo "$@"
+  fi
+}
+
+# Creates a lock on package manager (for all dotfiles scripts, not system wide).
 # 
-# Then calls sudo apt install -y on Ubuntu
-# or sudo dnf install -y on Fedora / Centos etc
+# Tries to read sudo password from $DOTFILES_PASSWORD_FILE
+# Call distro package manager (apt, dnf...) telling it to
+# install given packages. 
 #
-# Then deletes the lock.
-#
-# If $DOTFILES_PASSWORD_FILE exists it's used as sudo password.
-# Else user is asked for password by sudo.
+# Deletes the lock.
+# 
+# So far only apt supported
 distro_package_manager_install() {
-  sudo apt -y install "$@"
+  create_package_manager_lock "$(caller)"
+  feed_password_into_sudo apt install -y "$@"
+  delete_package_manager_lock
 }
 
-# Creates a lock file in $DOTFILES_TMP_DIR
+# Call distro package manager (apt, dnf...) telling it to 
+# uninstall given packages.
+# Obtains a lock first.
+# Tries to read sudo password from $DOTFILES_PASSWORD_FILE
 # 
-# Then calls sudo apt remove -y on Ubuntu
-# or sudo dnf remove -y on Fedora / Centos etc
-#
-# Then deletes the lock.
-#
-# If $DOTFILES_PASSWORD_FILE exists it's used as sudo password.
-# Else user is asked for password by sudo.
+# So far only apt supported
 distro_package_manager_uninstall() {
-  sudo apt -y remove "$@"
+  create_package_manager_lock "$(caller)"
+  feed_password_into_sudo apt remove -y "$@"
+  delete_package_manager_lock
 }
 
-# On Fedora / Centos I believe this is completely unnecessary
-# so it just returns.
+# Call distro package manager (apt, dnf...) telling it to
+# update package list. I think this is not necessary for dnf.
 
-# On Ubuntu:
-# Creates a lock file in $DOTFILES_TMP_DIR
-# Then calls sudo apt update
-# Then deletes the lock.
-#
-# If $DOTFILES_PASSWORD_FILE exists it's used as sudo password.
-# Else user is asked for password by sudo.
+# Obtains a lock first.
+# Tries to read sudo password from $DOTFILES_PASSWORD_FILE
+# 
+# So far only apt supported
 distro_package_manager_update() {
-  sudo apt update "$@"
+  create_package_manager_lock "$(caller)"
+  feed_password_into_sudo apt update "$@"
+  delete_package_manager_lock
 }
 
-# output helpers
+# Must be called with "$(caller)"
+#
+# If $DOTFILES_PACKAGE_MANAGER_LOCK_DIR doesn't exist, then:
+# - it gets created (this creates the lock).
+# It writes $(caller) information to $DOTFILES_PACKAGE_MANAGER_LOCK_INFO_FILE (for debugging purposes).
+
+# If it does exist it sleeps and tries again for predefined number of times until it succeeds or exits with fail message and code 2.
+# $DOTFILES_TMP_DIR
+# 
+# Locking explanation: https://wiki.bash-hackers.org/howto/mutex
+#
+create_package_manager_lock() {
+  for ((i=1; i<= DOTFILES_PACKAGE_MANAGER_LOCK_TRIES; i++)); do
+    if mkdir "$DOTFILES_PACKAGE_MANAGER_LOCK_DIR" 2>/dev/null; then
+      # lock successfuly created
+
+      I_HAVE_CREATED_PACKAGE_MANAGER_LOCK=true
+      echo "$@" > $DOTFILES_PACKAGE_MANAGER_LOCK_INFO_FILE
+      success_msg "Package manager locked"
+      return 0
+    else
+
+      # couldn't create lock
+      local msg
+
+      if [ ! -d "$DOTFILES_PACKAGE_MANAGER_LOCK_DIR" ]; then
+        # directory doesn't exist, probably lock was just released
+        msg="couldn't create lock but lock isn't present anymore."
+      elif [ -f "$DOTFILES_PACKAGE_MANAGER_LOCK_INFO_FILE" ]; then
+        msg="package manager locked by line $(cat $DOTFILES_PACKAGE_MANAGER_LOCK_INFO_FILE)"
+      else
+        msg="package manager is locked but I don't know who locked it"
+      fi
+      info_msg "Try $i / $DOTFILES_PACKAGE_MANAGER_LOCK_TRIES: $msg"
+
+      sleep $DOTFILES_PACKAGE_MANAGER_LOCK_SLEEP_BETWEEN_TRIES
+
+    fi
+  done
+
+  fail_msg "Couldn't create package manager lock\n(directory: $DOTFILES_PACKAGE_MANAGER_LOCK_DIR)"
+  exit 2
+}
+
+# Deletes $DOTFILES_PACKAGE_MANAGER_LOCK_DIR and 
+#         $DOTFILES_PACKAGE_MANAGER_LOCK_INFO_FILE
+delete_package_manager_lock() {
+  # [ -v var_name ] - is variable var_name defined
+  if [ -v I_HAVE_CREATED_PACKAGE_MANAGER_LOCK ]; then
+    rm $DOTFILES_PACKAGE_MANAGER_LOCK_INFO_FILE
+    rmdir $DOTFILES_PACKAGE_MANAGER_LOCK_DIR
+    success_msg "Package manager unlocked"
+  fi
+}
+
 info_msg () {
   printf "\n\r  [ \033[00;34m..\033[0m ] $1\n"
 }
@@ -115,7 +194,7 @@ report_error_and_exit() {
 }
 
 # Print error message in case of error (any command returns non zero)
-trap report_error_and_exit ERR
+trap "delete_package_manager_lock; report_error_and_exit" ERR
 
 # Print error message in case of interrupt
-trap "fail_msg_and_exit 'Installation interrupted!'" INT TERM
+trap "delete_package_manager_lock; fail_msg_and_exit 'Installation interrupted!'" INT TERM

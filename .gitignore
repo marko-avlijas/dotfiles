@@ -1,2 +1,2 @@
 config/git/gitconfig_secret
-tmp/**/
+tmp/**/*

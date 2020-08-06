@@ -129,6 +129,8 @@ distro_package_manager_update() {
 # Locking explanation: https://wiki.bash-hackers.org/howto/mutex
 #
 create_package_manager_lock() {
+  last_package_manager_lock_message=""
+
   for ((i=1; i<= DOTFILES_PACKAGE_MANAGER_LOCK_TRIES; i++)); do
     if mkdir "$DOTFILES_PACKAGE_MANAGER_LOCK_DIR" 2>/dev/null; then
       # lock successfuly created
@@ -140,18 +142,11 @@ create_package_manager_lock() {
     else
 
       # couldn't create lock
-      local msg
+      set_package_manager_lock_busy_explanation_msg
 
-      if [ ! -d "$DOTFILES_PACKAGE_MANAGER_LOCK_DIR" ]; then
-        # directory doesn't exist, probably lock was just released
-        msg="couldn't create lock but lock isn't present anymore."
-      elif [ -f "$DOTFILES_PACKAGE_MANAGER_LOCK_INFO_FILE" ]; then
-        msg="package manager locked by line $(cat $DOTFILES_PACKAGE_MANAGER_LOCK_INFO_FILE)"
-      else
-        msg="package manager is locked but I don't know who locked it"
-      fi
-      info_msg "Try $i / $DOTFILES_PACKAGE_MANAGER_LOCK_TRIES: $msg"
-
+      report_lock_wait_lock_progress $i $DOTFILES_PACKAGE_MANAGER_LOCK_TRIES \
+                                     "$package_manager_lock_busy_explanation_msg"
+                                   
       sleep $DOTFILES_PACKAGE_MANAGER_LOCK_SLEEP_BETWEEN_TRIES
 
     fi
@@ -161,6 +156,54 @@ create_package_manager_lock() {
   exit 2
 }
 
+set_package_manager_lock_busy_explanation_msg() {
+  if [ ! -d "$DOTFILES_PACKAGE_MANAGER_LOCK_DIR" ]; then
+    # directory doesn't exist, probably lock was just released
+    package_manager_lock_busy_explanation_msg="couldn't create lock but lock isn't present anymore."
+  elif [ -f "$DOTFILES_PACKAGE_MANAGER_LOCK_INFO_FILE" ]; then
+    package_manager_lock_busy_explanation_msg="package manager locked by line $(cat $DOTFILES_PACKAGE_MANAGER_LOCK_INFO_FILE)"
+  else
+    package_manager_lock_busy_explanation_msg="package manager is locked but I don't know who locked it"
+  fi
+}
+
+# Usage:
+# report_lock_waiting_progress(1 300 "package manager locked by ...")
+# current_try == 1
+# total_tries == 300 
+# info_message
+
+# prints something like:
+# Try 1 / 300: info_message
+#
+# if message is same then just print current try without new line
+# Try 2 / 300
+#
+# if message is still same it erases last line (Try 2 / 300) and replaces it with:
+# Try 3 /300
+#
+# If message changes then prints new line and new message.
+# Try 4 / 300: other message
+#
+report_lock_wait_lock_progress() {
+  local current_try=$1
+  local max_tries=$2
+  local msg=$3
+
+  local tries="Try $current_try / $max_tries"
+  local full_message="$tries: $msg"
+  if [[ $msg != $last_package_manager_lock_message ]]; then
+    # message has changed, print in new line
+    info_msg "$full_message"
+  else
+    # message stayed the same
+    echo -en "\033[2K"  # clear everything on current line
+    info_msg_in_same_line "$tries" # just print current try
+  fi
+
+  last_package_manager_lock_message=$msg
+}
+
 # Deletes $DOTFILES_PACKAGE_MANAGER_LOCK_DIR and 
 #         $DOTFILES_PACKAGE_MANAGER_LOCK_INFO_FILE
 delete_package_manager_lock() {
@@ -168,12 +211,17 @@ delete_package_manager_lock() {
   if [ -v I_HAVE_CREATED_PACKAGE_MANAGER_LOCK ]; then
     rm $DOTFILES_PACKAGE_MANAGER_LOCK_INFO_FILE
     rmdir $DOTFILES_PACKAGE_MANAGER_LOCK_DIR
+    unset I_HAVE_CREATED_PACKAGE_MANAGER_LOCK
     success_msg "Package manager unlocked"
   fi
 }
 
 info_msg () {
   printf "\n\r  [ \033[00;34m..\033[0m ] $1\n"
+}
+
+info_msg_in_same_line () {
+  printf "\r  [ \033[00;34m..\033[0m ] $1"
 }
 
 success_msg () {

@@ -127,8 +127,12 @@ distro_package_manager_update() {
 # $DOTFILES_TMP_DIR
 # 
 # Locking explanation: https://wiki.bash-hackers.org/howto/mutex
-#
+# Summary: checking if file exists and creating it are 2 steps.
+# It's not an atomic operation and race conditions can occur.
+# Creating a directory is atomic.
+# It must be done without -p flag so that it fails if it can't create a directory.
 create_package_manager_lock() {
+  mkdir $DOTFILES_TMP_DIR # if tmp directory doesn't exist creating a lock will fail
   last_package_manager_lock_message=""
 
   for ((i=1; i<= DOTFILES_PACKAGE_MANAGER_LOCK_TRIES; i++)); do

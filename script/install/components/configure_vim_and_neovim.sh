@@ -25,10 +25,10 @@ nvim_path=$(which nvim)
 
 # update-alternatives - maintain symbolic links determining default commands on Debian based systems
 #                                  link            name   path         priority 
-sudo update-alternatives --install /usr/bin/editor editor "$nvim_path" 1
-sudo update-alternatives --set editor "$nvim_path"
+feed_password_into_sudo update-alternatives --install /usr/bin/editor editor "$nvim_path" 1
+feed_password_into_sudo update-alternatives --set editor "$nvim_path"
 
-sudo update-alternatives --install /usr/bin/vi vi "$nvim_path" 1
-sudo update-alternatives --set vi "$nvim_path"
+feed_password_into_sudo update-alternatives --install /usr/bin/vi vi "$nvim_path" 1
+feed_password_into_sudo update-alternatives --set vi "$nvim_path"
 
 success_msg "Set nvim as default editor"

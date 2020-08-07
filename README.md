@@ -12,6 +12,36 @@ Tested on Ubuntu Ubuntu 20.04 LTS. Should work on Ubuntu-based distros like Linu
 
 Configuration is done by symlinking files like `~/.vimrc` and `~/.tmux.conf` to versions in this repository in [config](config) folder.
 
+## How to install
+
+**This is to be run on new computer.**
+**This will destroy your old configuration files!**
+
+First cd into dotfiles directory.
+Then:
+
+    cp config/git/gitconfig_secret.example config/git/gitconfig_secret
+
+Now open `config/git/gitconfig_secret` in your text editor and fill it with your git user name and email.
+
+Now install it in parts as laid out in `script/install`
+
+    ./script/install/1_install_git_and_tmux.sh
+    ./script/install/2_install_zsh_and_ruby_inside_tmux.sh
+
+After every part check that everything was executed correctly.
+
+Pick and choose what to install by changing `.tmuxinator.yml` files in
+[script/install/3_install_1st_batch/.tmuxinator.yml](script/install/3_install_1st_batch/.tmuxinator.yml) and
+[script/install/4_install_2nd_batch/.tmuxinator.yml](script/install/4_install_2nd_batch/.tmuxinator.yml). Then run:
+
+    ./script/install/tmuxinator_install.sh 3_install_1st_batch
+    ./script/install/tmuxinator_install.sh 4_install_2nd_batch
+
+Individual install components are in [script/install/components](script/install/components)
+and can be run independently if you wish so.
+
+
 ### Installation explained
 
 I have tried to get everything installed as quickly and comfortably as possible. Quickly means doing parallel installation whenever possible. Comfortably means using tmux and vim ASAP.
@@ -52,35 +82,6 @@ Everything that depends on something from step 3 can be installed now.
 You can see what's going to be installed in this step here:
 [script/install/4_install_2nd_batch/.tmuxinator.yml](script/install/4_install_2nd_batch/.tmuxinator.yml)
 
-
-## How to install
-
-**This is to be run on new computer.**
-**This will destroy your old configuration files!**
-
-First cd into dotfiles directory.
-Then:
-
-    cp config/git/gitconfig_secret.example config/git/gitconfig_secret
-
-Now open `config/git/gitconfig_secret` in your text editor and fill it with your git user name and email.
-
-Now install it in parts as laid out in `script/install`
-
-    ./script/install/1_install_git_and_tmux.sh
-    ./script/install/2_install_zsh_and_ruby_inside_tmux.sh
-
-After every part check that everything was executed correctly.
-
-Pick and choose what to install by changing `.tmuxinator.yml` files in
-[script/install/3_install_1st_batch/.tmuxinator.yml](script/install/3_install_1st_batch/.tmuxinator.yml) and
-[script/install/4_install_2nd_batch/.tmuxinator.yml](script/install/4_install_2nd_batch/.tmuxinator.yml). Then run:
-
-    ./script/install/tmuxinator_install.sh 3_install_1st_batch
-    ./script/install/tmuxinator_install.sh 4_install_2nd_batch
-
-Individual install components are in [script/install/components](script/install/components)
-and can be run independently if you wish so.
 
 ## Update [TODO]
 

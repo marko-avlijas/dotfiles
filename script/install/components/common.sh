@@ -64,7 +64,20 @@ smart_append_to_file() {
   return 0
 }
 
-# if $DOTFILES_PASSWORD_FILE exists it feeds it to sudo
+# Asks for sudo password and saves it in $DOTFILES_PASSWORD_FILE
+read_sudo_password_and_save_it_in_tmp_file() {
+  read -s -p "Please enter sudo password: "
+  echo "$REPLY" > "$DOTFILES_PASSWORD_FILE"
+  info_msg "Temporarily saved password to $DOTFILES_PASSWORD_FILE"
+}
+
+# Delete file containing sudo password
+delete_sudo_password() {
+  rm -v "$DOTFILES_PASSWORD_FILE"
+  info_msg "Deleted temporarily saved password in $DOTFILES_PASSWORD_FILE"
+}
+
+# If $DOTFILES_PASSWORD_FILE exists it feeds it to sudo
 # using sudo's --stdin option.
 # Otherwise it just performs sudo with given arguments
 # and user has to type the sudo password.
@@ -130,9 +143,13 @@ distro_package_manager_update() {
 # Summary: checking if file exists and creating it are 2 steps.
 # It's not an atomic operation and race conditions can occur.
 # Creating a directory is atomic.
-# It must be done without -p flag so that it fails if it can't create a directory.
+
+# There is a big difference between mkdir and mkdir -p.
+# mkdir will throw an error if directory already exists.
+# mkdir -p will not throw an error.
+# That's why mkdir must create lock directory without -p flag.
 create_package_manager_lock() {
-  mkdir $DOTFILES_TMP_DIR # if tmp directory doesn't exist creating a lock will fail
+  mkdir -p $DOTFILES_TMP_DIR # with -p so it doesn't fail if directory exists
   last_package_manager_lock_message=""
 
   for ((i=1; i<= DOTFILES_PACKAGE_MANAGER_LOCK_TRIES; i++)); do

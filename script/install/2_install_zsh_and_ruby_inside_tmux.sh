@@ -1,7 +1,12 @@
 #! /bin/bash
 
+# load common.sh if it's not loaded
+[ -z "$DOTFILES_DIR_ABS" ] && source "$(dirname "$0")/components/common.sh"
+
 TMUX_SESSION="Step 2"
-components_dir="$(dirname "$BASH_SOURCE")/components"
+components_dir="$DOTFILES_INSTALL_COMPONENTS_DIR"
+
+read_sudo_password_and_save_it_in_tmp_file
 
 # start new tmux session named "$TMUX_SESSION"
 tmux new-session -d -s "$TMUX_SESSION"
@@ -16,3 +21,5 @@ tmux select-pane -t 2
 tmux send-keys "$components_dir/install_zsh.sh && $components_dir/install_oh_my_zsh.sh" Enter
 
 tmux attach-session -t "$TMUX_SESSION"
+
+delete_sudo_password

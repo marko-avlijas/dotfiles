@@ -18,7 +18,8 @@ tmux send-keys "$components_dir/install_ruby_using_ruby_install_and_chruby.sh" E
 # create right pane
 tmux split-window -h
 tmux select-pane -t 2
-tmux send-keys "$components_dir/install_zsh.sh && $components_dir/install_oh_my_zsh.sh" Enter
+install_zsh_command="$components_dir/install_zsh.sh && $components_dir/install_oh_my_zsh.sh && $components_dir/configure_zsh.sh"
+tmux send-keys "$install_zsh_command" Enter
 
 tmux attach-session -t "$TMUX_SESSION"
 

@@ -53,7 +53,7 @@ if [ -d "$DOTFILES_SRC_DIR/vim" ]; then
   success_msg "git pull"
 else
   info_msg "Cloning vim git repo"
-  git clone git@github.com:vim/vim.git --depth=1
+  git clone "https://github.com/vim/vim" --depth=1
   success_msg "Clone vim git repo"
   cd vim
 fi

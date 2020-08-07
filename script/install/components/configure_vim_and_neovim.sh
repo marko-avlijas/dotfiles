@@ -18,10 +18,10 @@ success_msg "Configure neovim"
 # set nvim as default editor
 info_msg "Setting nvim as default editor"
 
-nvim_path=$(which nvim)
-if [ -z "$nvim_path" ]; then
+if [ -z $(which nvim) ]; then
   fail_msg_and_exit "Can't find nvim"
 fi
+nvim_path=$(which nvim)
 
 # update-alternatives - maintain symbolic links determining default commands on Debian based systems
 #                                  link            name   path         priority 

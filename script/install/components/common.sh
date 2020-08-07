@@ -83,11 +83,13 @@ delete_sudo_password() {
 # and user has to type the sudo password.
 feed_password_into_sudo() {
   # "$@" means expand all parameters just like they were sent
+  set -x
   if [ -f $DOTFILES_PASSWORD_FILE ]; then
     cat "$DOTFILES_PASSWORD_FILE" | sudo --stdin "$@"
   else
     sudo "$@"
   fi
+  set +x
 }
 
 # Creates a lock on package manager (for all dotfiles scripts, not system wide).

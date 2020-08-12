@@ -8,10 +8,6 @@ Reason for this project is:
 
 Tested on Ubuntu Ubuntu 20.04 LTS. Should work on Ubuntu-based distros like Linux Mint.
 
-### Configuration explained
-
-Configuration is done by symlinking files like `~/.vimrc` and `~/.tmux.conf` to versions in this repository in [config](config) folder.
-
 ## How to install
 
 **This is to be run on new computer.**
@@ -41,6 +37,24 @@ Pick and choose what to install by changing `.tmuxinator.yml` files in
 Individual install components are in [script/install/components](script/install/components)
 and can be run independently if you wish so.
 
+### Understanding directory structure
+
+* config dir holds configuration files like `vimrc`
+* script dir holds all logic
+
+script
+* bootstrap  - install everything on new computer
+* configure  - configure installed or updated tools
+* install    - install parts like vim or tmux
+* lib        - common code for all shell scripts
+* remove     - uninstall parts like vim or tmux **todo**
+* tools      - stuff like color_test etc
+* update     - update installed software **todo**
+
+
+### Configuration explained
+
+Configuration is done by symlinking files like `~/.vimrc` and `~/.tmux.conf` to versions in this repository in [config](config) folder.
 
 ### Installation explained
 

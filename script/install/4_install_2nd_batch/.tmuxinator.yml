@@ -52,5 +52,6 @@ windows:
   - readme:
       layout: tiles
       panes:
+        - "echo Run color_test/24_bit_color_test.sh"
         - "<%= @settings['components_dir'] %>/list_remaining_manual_actions.sh"
 

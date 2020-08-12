@@ -5,9 +5,14 @@
 
 info_msg "Manual steps remaining:\n"
 
-cat <<EOF
-  * remap CAPS LOCK to CTRL
-  * add generated ssh keys to github and bitbucket
-  * run $DOTFILES_DIR_ABS/color_test/24_bit_color_test.sh
-  * install tmux plugins (press prefix + I inside tmux)
-EOF
+echo Remap CAPS LOCK to CTRL
+
+echo -e "\n\n\n"
+
+echo -e "Add key to https://github.com/settings/keys \n\n"
+cat "$HOME/.ssh/github_rsa.pub"
+
+echo -e "\n\n\n"
+
+echo -e "Add key to https://bitbucket.org/account/settings/ssh-keys/ \n\n"
+cat "$HOME/.ssh/bitbucket_rsa.pub"

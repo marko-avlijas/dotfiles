@@ -32,8 +32,4 @@ info_msg "Installing tmux plugin manager"
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 info_msg "Install tpm"
 
-# Install tmux plugins
-info_msg "Installing tmux plugins"
-~/.tmux/plugins/tpm/scripts/install_plugins.sh
-info_msg "Install tmux plugins"
-
+echo "Press prefix + I (inside tmux) to install tmux plugins"

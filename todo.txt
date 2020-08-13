@@ -1,5 +1,0 @@
-# TODO
-
-Split into install and configure:
-* install_git
-* install_tmux

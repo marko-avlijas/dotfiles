@@ -1,7 +1,7 @@
 # ./.tmuxinator.yml
 
 name: 3_install_batch_1
-root: ~/
+root: <%= ENV["DOTFILES_DIR"] %>
 
 # Optional tmux socket
 # socket_name: foo
@@ -47,18 +47,18 @@ windows:
   - vim_neovim:
       layout: tiles
       panes:
-        - "<%= @settings['components_dir'] %>/compile_neovim.sh"
-        - "<%= @settings['components_dir'] %>/compile_full_vim.sh"
-        - "<%= @settings['components_dir'] %>/configure_vim_and_neovim.sh"
+        - "script/install/compile_neovim.sh"
+        - "script/install/compile_full_vim.sh"
+        - "script/install/configure_vim_and_neovim.sh"
   - dev:
       layout: tiles
       panes:
-        - "<%= @settings['components_dir'] %>/install_databases.sh"
-        - "<%= @settings['components_dir'] %>/install_node.sh"
-        - "<%= @settings['components_dir'] %>/install_yarn.sh"
+        - "script/install/install_databases.sh"
+        - "script/install/install_node.sh"
+        - "script/install/install_yarn.sh"
   - cli:
       layout: even-horizontal
       panes:
-        - "<%= @settings['components_dir'] %>/install_cli_utils.sh"
-        - "<%= @settings['components_dir'] %>/create_ssh_keys.sh"
+        - "script/install/install_cli_utils.sh"
+        - "script/install/create_ssh_keys.sh"
 

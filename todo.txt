@@ -1,50 +1,5 @@
 # TODO
 
-Missing: install meld in git
-
-* install rg fd bat
-* reorganize code
-* 1. install git and tmux
-* 2. before zsh & zsh inside tmux:
-    - left: create ssh keys
-    - right: install standard cli utils, install zsh & omg zsh
-  3. vim & ruby inside tmux:
-    - window 1:
-      - left: 1. compile neovim
-              2. configure neovim & vim
-      - right: compile vim
-    - window 2:
-      - install ruby using ruby-install & chruby
-  4. node yarn rails inside tmux:
-    - left: 1. node, sqlite-dev & postgres-dev, install yarn
-            2. install rails
-    - right: 1. install rg fd bat
-    - right: 2. install postgresql database
-
-
-* reorganize code final
-
-* 1. install git and tmux
-
-* 2. inside tmux: install zsh and ruby (also wget & curl)
-    -  install zsh & omg zsh
-    - install ruby using ruby-install & chruby
-
-  3. inside tmux:
-
-   vim / neovim
-    - compile neovim
-    - compile vim
-    - configure neovim & vim
-
-   dev rails
-    - install postgresql database
-    - sqlite-dev & postgres-dev
-    - node
-    - install yarn
-    - install rails
-
-   util
-    - install cli utils: tree, xclip, htop
-    - install from release: rg, fd bat
-    - create ssh keys for github and bitbucket
+Split into install and configure:
+* install_git
+* install_tmux

@@ -4,7 +4,6 @@
 [ -z "$DOTFILES_DIR_ABS" ] && source "$(dirname "$(dirname "$BASH_SOURCE")")/lib/all.sh"
 
 TMUX_SESSION="Step 2"
-components_dir="$DOTFILES_INSTALL_COMPONENTS_DIR"
 
 read_sudo_password_and_save_it_in_tmp_file
 
@@ -13,12 +12,12 @@ tmux new-session -d -s "$TMUX_SESSION"
 
 tmux rename-window "Step 2" 
 
-tmux send-keys "$components_dir/install_ruby_using_ruby_install_and_chruby.sh" Enter
+tmux send-keys "$DOTFILES_INSTALL_DIR/install_ruby_using_ruby_install_and_chruby.sh" Enter
 
 # create right pane
 tmux split-window -h
 tmux select-pane -t 2
-install_zsh_command="$components_dir/install_zsh.sh && $components_dir/install_oh_my_zsh.sh && $components_dir/configure_zsh.sh"
+install_zsh_command="$DOTFILES_INSTALL_DIR/install_zsh.sh && $DOTFILES_INSTALL_DIR/install_oh_my_zsh.sh && $DOTFILES_INSTALL_DIR/configure_zsh.sh"
 tmux send-keys "$install_zsh_command" Enter
 
 tmux attach-session -t "$TMUX_SESSION"

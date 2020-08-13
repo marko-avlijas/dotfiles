@@ -6,8 +6,6 @@
 #   https://github.com/neovim/neovim/wiki/Building-Neovim
 #   https://github.com/neovim/neovim/wiki/Installing-Neovim#install-from-source
 
-NEOVIM_SRC_DIR="$HOME/src"
-
 # load script/lib/all.sh if it isn't loaded
 [ -z "$DOTFILES_DIR_ABS" ] && source "$(dirname "$(dirname "$BASH_SOURCE")")/lib/all.sh"
 
@@ -24,8 +22,8 @@ distro_package_manager_install ninja-build gettext libtool libtool-bin autoconf 
 info_msg "Compiling neovim"
 
 # clone repo
-mkdir -p "$NEOVIM_SRC_DIR"
-cd "$NEOVIM_SRC_DIR"
+mkdir -p "$DOTFILES_SRC_DIR"
+cd "$DOTFILES_SRC_DIR"
 git clone https://github.com/neovim/neovim
 cd neovim
 git checkout stable

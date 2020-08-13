@@ -53,7 +53,7 @@ else
   git clone "https://github.com/postmodern/chruby"
   cd chruby
   # sudo make install     # this doesn't work for some reason
-  sudo ./scripts/setup.sh # this is alternative from chruby's README
+  feed_password_into_sudo ./scripts/setup.sh # this is alternative from chruby's README
 
   if ! chruby_installed; then
    fail_msg_and_exit "Install chruby"

@@ -8,12 +8,14 @@ set -Euo pipefail
 # you can set it anywhere in file like this
 # set -x
 
-DOTFILES_DIR_ABS="$(dirname "$(dirname "$(dirname "$(dirname "$(readlink -f "$BASH_SOURCE")")")")")"
+DOTFILES_DIR_ABS="$(dirname "$(dirname "$(dirname "$(readlink -f "$BASH_SOURCE")")")")"
 DOTFILES_DIR_REL_FROM_HOME="${DOTFILES_DIR_ABS#"$HOME/"}"
 DOTFILES_SRC_DIR="$HOME/src" # directory for cloning git repos
+DOTFILES_LAB_DIR="$HOME/lab" # directory for quick tests
 
 DOTFILES_INSTALL_DIR="$DOTFILES_DIR_ABS/script/install"
-DOTFILES_INSTALL_COMPONENTS_DIR="$DOTFILES_INSTALL_DIR/components"
+DOTFILES_CONFIGURE_DIR="$DOTFILES_DIR_ABS/script/configure"
+DOTFILES_BOOTSTRAP_DIR="$DOTFILES_DIR_ABS/script/bootstrap"
 
 DOTFILES_TMP_DIR="$DOTFILES_DIR_ABS/tmp"
 DOTFILES_PASSWORD_FILE="$DOTFILES_TMP_DIR/pass"

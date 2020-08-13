@@ -3,7 +3,6 @@
 # load script/lib/all.sh if it isn't loaded
 [ -z "$DOTFILES_DIR_ABS" ] && source "$(dirname "$(dirname "$BASH_SOURCE")")/lib/all.sh"
 
-LAB_DIR="$HOME/lab"
 
 # install rails
 info_msg "Installing rails\n"
@@ -19,10 +18,10 @@ success_msg "Install rails"
 # create test app
 
 rails_test_app="dotfiles_test_app"
-info_msg "Creating test app in $LAB_DIR/$rails_test_app\n"
+info_msg "Creating test app in $DOTFILES_LAB_DIR/$rails_test_app\n"
 
-mkdir -p "$LAB_DIR"
-cd "$LAB_DIR"
+mkdir -p "$DOTFILES_LAB_DIR"
+cd "$DOTFILES_LAB_DIR"
 rm -rf "$rails_test_app"
 rails new "$rails_test_app"
 cd "$rails_test_app"

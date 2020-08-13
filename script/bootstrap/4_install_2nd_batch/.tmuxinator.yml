@@ -1,7 +1,7 @@
 # ./.tmuxinator.yml
 
 name: 4_install_batch_2
-root: ~/
+root: <%= ENV["DOTFILES_DIR"] %>
 
 # Optional tmux socket
 # socket_name: foo
@@ -36,7 +36,7 @@ root: ~/
 # tmux_command: byobu
 
 # Specifies (by name or index) which window will be selected on project startup. If not set, the first window is used.
-startup_window: vim_neovim
+startup_window: dev
 
 # Specifies (by index) which pane of the specified window will be selected on project startup. If not set, the first pane is used.
 # startup_pane: 1
@@ -47,11 +47,11 @@ windows:
   - dev:
       layout: even-horizontal
       panes:
-        - "<%= @settings['components_dir'] %>/install_pgadmin4.sh"
-        - "<%= @settings['components_dir'] %>/install_rails.sh"
+        - "script/install/install_pgadmin4.sh"
+        - "script/install/install_rails.sh"
   - readme:
-      layout: tiles
+      layout: even-horizontal
       panes:
-        - "echo Run color_test/24_bit_color_test.sh"
-        - "<%= @settings['components_dir'] %>/list_remaining_manual_actions.sh"
+        - "script/tools/color_test/24_bit_color_test.sh"
+        - "script/install/list_remaining_manual_actions.sh"
 

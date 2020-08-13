@@ -22,19 +22,19 @@ Now open `config/git/gitconfig_secret` in your text editor and fill it with your
 
 Now install it in parts as laid out in `script/install`
 
-    ./script/install/1_install_git_and_tmux.sh
-    ./script/install/2_install_zsh_and_ruby_inside_tmux.sh
+    ./script/bootstrap/1_install_git_and_tmux.sh
+    ./script/bootstrap/2_install_zsh_and_ruby_inside_tmux.sh
 
 After every part check that everything was executed correctly.
 
 Pick and choose what to install by changing `.tmuxinator.yml` files in
-[script/install/3_install_1st_batch/.tmuxinator.yml](script/install/3_install_1st_batch/.tmuxinator.yml) and
-[script/install/4_install_2nd_batch/.tmuxinator.yml](script/install/4_install_2nd_batch/.tmuxinator.yml). Then run:
+[script/bootstrap/3_install_1st_batch/.tmuxinator.yml](script/bootstrap/3_install_1st_batch/.tmuxinator.yml) and
+[script/bootstrap/4_install_2nd_batch/.tmuxinator.yml](script/bootstrap/4_install_2nd_batch/.tmuxinator.yml). Then run:
 
-    ./script/install/tmuxinator_install.sh 3_install_1st_batch
-    ./script/install/tmuxinator_install.sh 4_install_2nd_batch
+    ./script/tools/tmuxinator_install.sh 3_install_1st_batch
+    ./script/tools/tmuxinator_install.sh 4_install_2nd_batch
 
-Individual install components are in [script/install/components](script/install/components)
+Individual install files are in [script/install](script/install)
 and can be run independently if you wish so.
 
 ### Understanding directory structure
@@ -66,7 +66,7 @@ That was the reason behind dividing installation like it is.
 
 First there is nothing on computer and git and tmux need to be installed. Git is also setup to use your name and email.
 
-[script/install/1_install_git_and_tmux.sh](script/install/1_install_git_and_tmux.sh)
+[script/bootstrap/1_install_git_and_tmux.sh](script/bootstrap/1_install_git_and_tmux.sh)
 
 #### Part 2
 
@@ -77,7 +77,7 @@ It only installs:
   - left pane: ruby & tmuxinator
   - right pane: zsh & oh my zsh
 
-[script/install/2_install_zsh_and_ruby_inside_tmux.sh](script/install/2_install_zsh_and_ruby_inside_tmux.sh)
+[script/bootstrap/2_install_zsh_and_ruby_inside_tmux.sh](script/bootstrap/2_install_zsh_and_ruby_inside_tmux.sh)
 
 #### Part 3
 
@@ -87,14 +87,14 @@ Everything with dependencies gets installed in part 4.
 First you are asked to enter sudo password. This is saved to a file in tmp dir and should be automatically deleted after tmuxinator is finished. This is to avoid entering sudo password in every tmux pane.
 
 You can see what's going to be installed in this step here:
-[script/install/3_install_1st_batch/.tmuxinator.yml](script/install/3_install_1st_batch/.tmuxinator.yml)
+[script/bootstrap/3_install_1st_batch/.tmuxinator.yml](script/bootstrap/3_install_1st_batch/.tmuxinator.yml)
 
 #### Part 4
 
 Everything that depends on something from step 3 can be installed now.
 
 You can see what's going to be installed in this step here:
-[script/install/4_install_2nd_batch/.tmuxinator.yml](script/install/4_install_2nd_batch/.tmuxinator.yml)
+[script/bootstrap/4_install_2nd_batch/.tmuxinator.yml](script/bootstrap/4_install_2nd_batch/.tmuxinator.yml)
 
 
 ## Update [TODO]
@@ -104,10 +104,7 @@ If you never update it will still be newer than Ubuntu packages.
 
 ## What's inside?
 
-Please checkout these directories:
-
-* [config](config)
-* [install/script/components](install/script/components)
+Please checkout directory [config](config)
 
 I use neovim & vim as editor, tmux and zsh and have some git aliases.
 I am a rails developer so I have to install ruby, node, yarn, postgresql, sqlite and rails.
@@ -123,16 +120,9 @@ https://github.com/BurntSushi/ripgrep
 bat (cat with syntax highlighting, written in rust)
 https://github.com/sharkdp/bat/
 
-To do:
+### To do:
 
 * choose themes for vim and tmux (maybe https://github.com/rafi/awesome-vim-colorschemes)
 * setup terminal themes (maybe not necessary?)
 * install other cli utils (rg, fd, bat)
 * install postgresql
-
-## What's left to do
-
-These are things I didn't bother to automate and I need to do manually before I can start writing software.
-
-* remap CAPS LOCK to CTRL
-* add generated ssh keys to github and bitbucket

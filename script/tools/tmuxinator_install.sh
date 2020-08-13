@@ -10,14 +10,9 @@
 
 read_sudo_password_and_save_it_in_tmp_file
 
-# change to correct directory
-cd "${DOTFILES_INSTALL_DIR}/$1"
-
 # start tmuxinator and wait for it to finish
-tmuxinator start project "components_dir=$DOTFILES_INSTALL_COMPONENTS_DIR"
+DOTFILES_DIR="$DOTFILES_DIR_ABS" tmuxinator start --project-config="${DOTFILES_BOOTSTRAP_DIR}/$1/.tmuxinator.yml"
 
 delete_sudo_password
 
-cd "$OLD_WORKING_DIRECTORY"
-
-success_msg "Script complete"
+success_msg "tmuxinator_install '$1' complete!"

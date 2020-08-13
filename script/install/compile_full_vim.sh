@@ -19,13 +19,7 @@ success_msg "Remove system vim"
 # return if vim is already installed
 if command_exists vim; then
   info_msg "Vim already installed - skipping"
-
-  # return or exit depending whether called from other script
-  if [ -v CALLED_FROM_OTHER_SCRIPT ]; then # -v - is variable defined
-    return 0 
-  else
-    exit 0 
-  fi
+  exit 0 
 fi
 
 # install prerequisites

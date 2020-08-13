@@ -5,8 +5,8 @@
 
 # Example: tmuxinator_install.sh 3_parallel_install_1st_batch
 
-# load common.sh if it's not loaded
-[ -z "$DOTFILES_DIR_ABS" ] && source "$(dirname "$0")/components/common.sh"
+# load script/lib/all.sh if it isn't loaded
+[ -z "$DOTFILES_DIR_ABS" ] && source "$(dirname "$(dirname "$BASH_SOURCE")")/lib/all.sh"
 
 read_sudo_password_and_save_it_in_tmp_file
 

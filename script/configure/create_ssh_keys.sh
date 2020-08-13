@@ -3,8 +3,8 @@
 # Create ssh keys with empty passphrase for github and bitbucket
 # Does not create keys if they exist
 
-# load common.sh if it isn't loaded
-[ -z "$DOTFILES_DIR_ABS" ] && source "$(dirname "$0")/common.sh"
+# load script/lib/all.sh if it isn't loaded
+[ -z "$DOTFILES_DIR_ABS" ] && source "$(dirname "$(dirname "$BASH_SOURCE")")/lib/all.sh"
 
 my_git_user_email="$(git config user.email)"
 
@@ -28,4 +28,4 @@ info_msg "Creating github_rsa and bitbucket_rsa ssh keys\n"
 create_ssh_key "$HOME/.ssh/github_rsa"
 create_ssh_key "$HOME/.ssh/bitbucket_rsa"
 
-
+success_msg "Create SSH keys"

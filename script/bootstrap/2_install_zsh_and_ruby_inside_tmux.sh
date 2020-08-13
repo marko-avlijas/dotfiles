@@ -1,7 +1,7 @@
 #! /bin/bash
 
-# load common.sh if it's not loaded
-[ -z "$DOTFILES_DIR_ABS" ] && source "$(dirname "$0")/components/common.sh"
+# load script/lib/all.sh if it isn't loaded
+[ -z "$DOTFILES_DIR_ABS" ] && source "$(dirname "$(dirname "$BASH_SOURCE")")/lib/all.sh"
 
 TMUX_SESSION="Step 2"
 components_dir="$DOTFILES_INSTALL_COMPONENTS_DIR"

@@ -3,8 +3,8 @@
 # Based on: https://github.com/Valloric/YouCompleteMe/wiki/Building-Vim-from-source
 # and https://github.com/vim/vim/blob/master/src/Makefile
 
-# load common.sh if it isn't loaded
-[ -z "$DOTFILES_DIR_ABS" ] && source "$(dirname "$0")/common.sh"
+# load script/lib/all.sh if it isn't loaded
+[ -z "$DOTFILES_DIR_ABS" ] && source "$(dirname "$(dirname "$BASH_SOURCE")")/lib/all.sh"
 
 # remove existing vim
 info_msg "Removing system vim"

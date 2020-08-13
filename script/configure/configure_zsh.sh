@@ -1,7 +1,7 @@
 #! /bin/bash
 
-# load common.sh if it isn't loaded
-[ -z "$DOTFILES_DIR_ABS" ] && source "$(dirname "$0")/common.sh"
+# load script/lib/all.sh if it isn't loaded
+[ -z "$DOTFILES_DIR_ABS" ] && source "$(dirname "$(dirname "$BASH_SOURCE")")/lib/all.sh"
 
 # append: source "$DOTFILES_DIR_ABS/config/shell/bash_and_zsh.sh"
 # to ~/.bashrc and ~/.zshrc

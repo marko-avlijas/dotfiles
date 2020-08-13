@@ -1,7 +1,7 @@
 #! /bin/bash
 
-# load common.sh if it isn't loaded
-[ -z "$DOTFILES_DIR_ABS" ] && source "$(dirname "$0")/common.sh"
+# load script/lib/all.sh if it isn't loaded
+[ -z "$DOTFILES_DIR_ABS" ] && source "$(dirname "$(dirname "$BASH_SOURCE")")/lib/all.sh"
 
 # install tmux
 

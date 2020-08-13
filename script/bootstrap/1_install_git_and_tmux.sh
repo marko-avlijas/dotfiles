@@ -1,14 +1,15 @@
 #! /bin/bash
 
-components_dir="$(dirname "$BASH_SOURCE")/components"
+script_dir="$(dirname "$(dirname "$BASH_SOURCE")")"
+install_dir="$script_dir/install"
 
-source "$components_dir/common.sh"
+source "$script_dir/lib/all.sh"
 
 info_msg "Starting installation"
 
 distro_package_manager_update
 
-source "$components_dir/install_git.sh"
-source "$components_dir/install_tmux.sh"
+source "$install_dir/install_git.sh"
+source "$install_dir/install_tmux.sh"
 
 success_msg "git and tmux installed"

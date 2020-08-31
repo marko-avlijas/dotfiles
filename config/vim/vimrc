@@ -22,8 +22,12 @@ command! W :execute ':silent w !sudo tee % > /dev/null' | :edit!
 if ! has('nvim')
   call plug#begin('~/.vim/plugged')
 
+  " Fuzzy finder
   Plug 'junegunn/fzf'
   Plug 'junegunn/fzf.vim'
+
+  " Project directory tree
+  Plug 'preservim/nerdtree'
 
   " Initialize plugin system
   call plug#end()
@@ -31,3 +35,6 @@ endif
 
 " CTRL p  opens fzf
 nnoremap <C-p> :<C-u>FZF<CR>
+
+" CTRL n toggles NERDTree
+nnoremap <C-n> :NERDTreeToggle<CR>

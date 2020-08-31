@@ -123,6 +123,4 @@ https://github.com/sharkdp/bat/
 ### To do:
 
 * choose themes for vim and tmux (maybe https://github.com/rafi/awesome-vim-colorschemes)
-* setup terminal themes (maybe not necessary?)
 * install other cli utils (rg, fd, bat)
-* install postgresql

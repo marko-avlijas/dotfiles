@@ -3,6 +3,14 @@ set termguicolors
 
 " Settings
 " -------
+if has('autocmd')
+  filetype plugin indent on
+endif
+
+if has('syntax') && !exists('g:syntax_on')
+  syntax enable
+endif
+
 set expandtab     " change tabs to spaces
 " set tabs to 2 chars (ruby style)
 set shiftwidth=2
@@ -18,23 +26,31 @@ set hidden
 " Save privilleged files with sudo
 command! W :execute ':silent w !sudo tee % > /dev/null' | :edit!
 
-" load vim-plug for vim only
+" load plugins for vim and neovim
 if ! has('nvim')
   call plug#begin('~/.vim/plugged')
-
-  " Fuzzy finder
-  Plug 'junegunn/fzf'
-  Plug 'junegunn/fzf.vim'
-
-  " Project directory tree
-  Plug 'preservim/nerdtree'
-
-  " Initialize plugin system
-  call plug#end()
+else
+  call plug#begin('~/.config/nvim/plugged')
 endif
+
+" Fuzzy finder
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
+
+" Project directory tree
+Plug 'preservim/nerdtree'
+
+" Colorshemes
+Plug 'arcticicestudio/nord-vim'
+
+" Initialize plugin system
+call plug#end()
 
 " CTRL p  opens fzf
 nnoremap <C-p> :<C-u>FZF<CR>
 
 " CTRL n toggles NERDTree
 nnoremap <C-n> :NERDTreeToggle<CR>
+
+" Choose colorscheme
+colorscheme nord

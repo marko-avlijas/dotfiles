@@ -27,10 +27,10 @@ set hidden
 command! W :execute ':silent w !sudo tee % > /dev/null' | :edit!
 
 " load plugins for vim and neovim
-if ! has('nvim')
-  call plug#begin('~/.vim/plugged')
-else
+if has('nvim')
   call plug#begin('~/.config/nvim/plugged')
+else
+  call plug#begin('~/.vim/plugged')
 endif
 
 " Fuzzy finder
@@ -42,6 +42,9 @@ Plug 'preservim/nerdtree'
 
 " Colorshemes
 Plug 'arcticicestudio/nord-vim'
+Plug 'cocopon/iceberg.vim'
+Plug 'mhartington/oceanic-next'
+Plug 'dracula/vim', { 'as': 'dracula' }
 
 " Initialize plugin system
 call plug#end()
@@ -53,4 +56,4 @@ nnoremap <C-p> :<C-u>FZF<CR>
 nnoremap <C-n> :NERDTreeToggle<CR>
 
 " Choose colorscheme
-colorscheme nord
+colorscheme dracula

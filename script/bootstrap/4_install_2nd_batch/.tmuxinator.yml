@@ -44,6 +44,11 @@ startup_window: dev
 # Controls whether the tmux session should be attached to automatically. Defaults to true.
 # attach: false
 windows:
+  - vim_neovim:
+      layout: even-horizontal
+      panes:
+        - "script/install/install_vim_plug_for_vim.sh"
+        - "script/install/install_vim_plug_for_neovim.sh"
   - dev:
       layout: even-horizontal
       panes:
@@ -54,4 +59,3 @@ windows:
       panes:
         - "script/tools/color_test/24_bit_color_test.sh"
         - "script/install/list_remaining_manual_actions.sh"
-

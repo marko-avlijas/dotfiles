@@ -50,6 +50,7 @@ windows:
         - "script/install/compile_neovim.sh"
         - "script/install/compile_full_vim.sh"
         - "script/install/configure_vim_and_neovim.sh"
+        - "script/install/install_fzf.sh"
   - dev:
       layout: tiles
       panes:

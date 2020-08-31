@@ -1,4 +1,3 @@
-
 " Truecolor (24-bit color) support
 set termguicolors
 
@@ -18,3 +17,17 @@ set hidden
 
 " Save privilleged files with sudo
 command! W :execute ':silent w !sudo tee % > /dev/null' | :edit!
+
+" load vim-plug for vim only
+if ! has('nvim')
+  call plug#begin('~/.vim/plugged')
+
+  Plug 'junegunn/fzf'
+  Plug 'junegunn/fzf.vim'
+
+  " Initialize plugin system
+  call plug#end()
+endif
+
+" CTRL p  opens fzf
+nnoremap <C-p> :<C-u>FZF<CR>

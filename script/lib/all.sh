@@ -8,7 +8,7 @@ set -Euo pipefail
 # you can set it anywhere in file like this
 # set -x
 
-DOTFILES_DIR_ABS="$(dirname "$(dirname "$(dirname "$(readlink -f "$BASH_SOURCE")")")")"
+DOTFILES_DIR_ABS="$HOME/dotfiles"
 DOTFILES_DIR_REL_FROM_HOME="${DOTFILES_DIR_ABS#"$HOME/"}"
 DOTFILES_SRC_DIR="$HOME/src" # directory for cloning git repos
 DOTFILES_LAB_DIR="$HOME/lab" # directory for quick tests
@@ -160,7 +160,7 @@ create_package_manager_lock() {
     if mkdir "$DOTFILES_PACKAGE_MANAGER_LOCK_DIR" 2>/dev/null; then
       # lock successfuly created
 
-      I_HAVE_CREATED_PACKAGE_MANAGER_LOCK=true
+      I_HAVE_CREATED_PACKAGE_MANAGER_LOCK="true"
       echo "$@" > $DOTFILES_PACKAGE_MANAGER_LOCK_INFO_FILE
       success_msg "Package manager locked"
       return 0
@@ -232,8 +232,8 @@ report_lock_wait_lock_progress() {
 # Deletes $DOTFILES_PACKAGE_MANAGER_LOCK_DIR and 
 #         $DOTFILES_PACKAGE_MANAGER_LOCK_INFO_FILE
 delete_package_manager_lock() {
-  # [ -v var_name ] - is variable var_name defined
-  if [ -v I_HAVE_CREATED_PACKAGE_MANAGER_LOCK ]; then
+  # [ -v var_name ] - is variable var_name defined works in bash >= 4.0
+  if [ -n I_HAVE_CREATED_PACKAGE_MANAGER_LOCK ]; then
     rm $DOTFILES_PACKAGE_MANAGER_LOCK_INFO_FILE
     rmdir $DOTFILES_PACKAGE_MANAGER_LOCK_DIR
     unset I_HAVE_CREATED_PACKAGE_MANAGER_LOCK
